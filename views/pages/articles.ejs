@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+  <% include ../partials/nav.ejs %>
+
+  <div>
+      <% for(var i=0; i<articles.length; i++) { %>
+          <div style='background-color:yellow;margin:20px'>
+             <h3>
+                Title:  <%= articles[i]['title'] %>
+              </h3>
+              <p style='color:orange'>
+                  <%= articles[i]['articleText'] %>
+              </p>
+              <h4>
+                  Author: <%= articles[i]['fullName'] %>
+               </h4>
+          </div>
+      <% } %>
+  </div>
+</body>
+</html>

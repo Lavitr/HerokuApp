@@ -12,7 +12,7 @@
 
 <body>
 
-  <form method="post" action="/addname" id="user-form">
+  <form method="post" action="/addArticle" id="user-form">
     <input type="text" name="title" placeholder=" Enter article title..." required maxlength="30">
     <textarea name="articleText" rows="10" cols="100" form="user-form" placeholder="   Enter article text here, maximum number of characters is 400..."
       maxlength="400" required></textarea>
@@ -20,7 +20,7 @@
     <input type="submit" value="Add article to DB" class="btn btn-primary">
   </form>
   <form action="/articles" method="get">
-    <input type="submit" value="Get five articles from DB" class="btn btn-primary">
+    <input type="submit" value="Show five articles from DB" class="btn btn-primary">
   </form>
 </body>
 

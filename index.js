@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 
 const app = express();
-
 const url = process.env.MONGOLAB_URI;
 
 mongoose.Promise = global.Promise;
@@ -14,8 +13,8 @@ const articleSchema = new mongoose.Schema({
   articleText: String,
   fullName: String
 });
-const Article = mongoose.model("Article", articleSchema);
 
+const Article = mongoose.model("Article", articleSchema);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,7 +24,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function (request, response) {
-  response.render('pages/index')
+  response.render('index')
 });
 
 app.listen(app.get('port'), function () {
@@ -35,22 +34,20 @@ app.listen(app.get('port'), function () {
 app.get('/articles', function (req, response) {
   Article.find({}, { _id: 0, title: 1, articleText: 1, fullName: 1 }).limit(5).exec(function (err, articles) {
     if (err) return console.error(err);
-    response.render('pages/articles', { articles: articles });
+    response.render('articles', { articles: articles });
   })
-
 })
 
-app.post("/addname", (req, res) => {
+app.post("/addArticle", (req, res) => {
 
-  /***check if DB is full(contains five items) remove one item ***/
+  /***checking if DB is full(contains five items) remove one item ***/
   Article.find({}).exec(function (err, articles) {
     if (err) return console.error(err);
     if (articles.length >= 5) {
       Article.findOneAndRemove().exec();
     }
   })
-  /*** end check ***/
-
+  /***********************end of checking***************************/
   const myData = new Article(req.body);
   myData.save()
     .then(item => {
